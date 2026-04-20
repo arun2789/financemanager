@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rupee Nest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark" aria-hidden="true">₹</div>
+          <div>
+            <p class="eyebrow">Rupee Nest</p>
+            <h1>Personal money, neatly in one place.</h1>
+          </div>
+        </div>
+
+        <nav class="side-nav" aria-label="Primary">
+          <a class="is-active" href="#overview">Overview</a>
+          <a href="#transactions">Transactions</a>
+          <a href="#sources">Sources</a>
+          <a href="#budgets">Budgets</a>
+        </nav>
+
+        <section class="sync-card" aria-labelledby="sync-title">
+          <div>
+            <span class="status-dot"></span>
+            <p id="sync-title">Last sync</p>
+          </div>
+          <strong id="last-sync"></strong>
+          <span id="sync-count"></span>
+        </section>
+      </aside>
+
+      <main class="main-panel">
+        <section id="overview" class="topbar">
+          <div>
+            <p class="eyebrow">April 2026</p>
+            <h2>Good evening, Arun</h2>
+          </div>
+          <div class="toolbar" role="group" aria-label="Quick actions">
+            <button id="sync-button" class="icon-button" type="button" title="Sync sources" aria-label="Sync sources">↻</button>
+            <button id="add-expense-button" class="primary-button" type="button">
+              <span aria-hidden="true">+</span>
+              Expense
+            </button>
+          </div>
+        </section>
+
+        <section class="summary-grid" aria-label="Monthly summary">
+          <article class="summary-card balance">
+            <span>Available balance</span>
+            <strong id="available-balance"></strong>
+            <p id="net-worth-note"></p>
+          </article>
+          <article class="summary-card">
+            <span>This month spent</span>
+            <strong id="month-spend"></strong>
+            <p id="spend-note"></p>
+          </article>
+          <article class="summary-card">
+            <span>Saved this month</span>
+            <strong id="month-saved"></strong>
+            <p id="save-note"></p>
+          </article>
+          <article class="summary-card">
+            <span>Upcoming bills</span>
+            <strong id="upcoming-bills"></strong>
+            <p id="bills-note"></p>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article id="transactions" class="panel transactions-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Money out</p>
+                <h3>Recent expenses</h3>
+              </div>
+              <select id="category-filter" class="select-control" aria-label="Filter expenses by category">
+                <option value="All">All categories</option>
+              </select>
+            </div>
+            <div id="transaction-list" class="transaction-list"></div>
+          </article>
+
+          <div class="side-column">
+            <article id="sources" class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Connected sources</p>
+                  <h3>Accounts</h3>
+                </div>
+              </div>
+              <div id="source-list" class="source-list"></div>
+            </article>
+
+            <article id="budgets" class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Monthly limits</p>
+                  <h3>Budgets</h3>
+                </div>
+              </div>
+              <div id="budget-list" class="budget-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="bottom-grid">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Due soon</p>
+                <h3>Bills and EMIs</h3>
+              </div>
+            </div>
+            <div id="bill-list" class="bill-list"></div>
+          </article>
+
+          <article class="panel add-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Capture</p>
+                <h3>Add expense</h3>
+              </div>
+            </div>
+
+            <form id="expense-form" class="expense-form">
+              <label>
+                Merchant
+                <input id="merchant" name="merchant" type="text" placeholder="Swiggy, BigBasket, Uber" required />
+              </label>
+              <label>
+                Amount
+                <input id="amount" name="amount" type="number" min="1" step="1" placeholder="1299" required />
+              </label>
+              <label>
+                Category
+                <select id="category" name="category"></select>
+              </label>
+              <label>
+                Source
+                <select id="source" name="source"></select>
+              </label>
+              <label>
+                Date
+                <input id="date" name="date" type="date" required />
+              </label>
+              <label>
+                Type
+                <select id="type" name="type">
+                  <option value="Expense">Expense</option>
+                  <option value="Income">Income</option>
+                  <option value="Transfer">Transfer</option>
+                </select>
+              </label>
+              <label class="full-width">
+                Notes
+                <textarea id="notes" name="notes" rows="3" placeholder="Optional note or split detail"></textarea>
+              </label>
+              <button class="primary-button form-button" type="submit">
+                <span aria-hidden="true">✓</span>
+                Save
+              </button>
+            </form>
+          </article>
+        </section>
+
+        <footer class="app-footer">
+          <span>Local-first web app. Bank, UPI, card, wallet, and CSV imports are represented as source connectors.</span>
+          <span>v1.0.0</span>
+        </footer>
+      </main>
+    </div>
+
+    <template id="transaction-template">
+      <article class="transaction-item">
+        <div class="transaction-icon" aria-hidden="true"></div>
+        <div>
+          <h4 class="transaction-merchant"></h4>
+          <p class="transaction-meta"></p>
+        </div>
+        <strong class="transaction-amount"></strong>
+      </article>
+    </template>
+
+    <template id="source-template">
+      <article class="source-item">
+        <div>
+          <h4 class="source-name"></h4>
+          <p class="source-kind"></p>
+        </div>
+        <span class="source-status"></span>
+      </article>
+    </template>
+
+    <template id="budget-template">
+      <article class="budget-item">
+        <div class="budget-row">
+          <h4 class="budget-category"></h4>
+          <span class="budget-value"></span>
+        </div>
+        <div class="progress-track">
+          <span class="progress-fill"></span>
+        </div>
+      </article>
+    </template>
+
+    <template id="bill-template">
+      <article class="bill-item">
+        <div>
+          <h4 class="bill-name"></h4>
+          <p class="bill-date"></p>
+        </div>
+        <strong class="bill-amount"></strong>
+      </article>
+    </template>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

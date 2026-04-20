@@ -1,0 +1,16 @@
+{
+  "name": "rupee-nest-web",
+  "version": "1.0.0",
+  "description": "A clean India-first personal finance web app for tracking expenses, budgets, bills, and connected sources.",
+  "scripts": {
+    "start": "python3 -m http.server 5173 -d src"
+  },
+  "keywords": [
+    "finance",
+    "expenses",
+    "india",
+    "budgeting"
+  ],
+  "author": "Arun Srinivasan",
+  "license": "MIT"
+}
